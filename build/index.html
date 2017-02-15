@@ -13,9 +13,9 @@
         <div class="progress">
             <div class="
             	{{($index === activeQuestion) ? 'on' : 'off'}}
-            	{{(myQuestion.questionState === 'answered') ? 'answered' : 'unanswered'}}
-            	{{(myQuestion.correctness === 'correct') ? 'correct' : 'incorrect'}}" 
-            	ng-repeat="myQuestion in myQuestions">
+            	{{(item.questionState === 'answered') ? 'answered' : 'unanswered'}}
+            	{{(item.correctness === 'correct') ? 'correct' : 'incorrect'}}" 
+            	ng-repeat="item in quizList">
             </div>
         </div>
         <div class="intro {{(activeQuestion > -1) ? 'inactive' : 'active'}}">
@@ -25,25 +25,25 @@
         </div>
         <div class="question
 			{{ $index === activeQuestion ? 'active' : 'inactive' }}       	
-        	{{myQuestion.questionState === 'answered' ? 'answered' : 'unanswered' }}" 
-        	ng-repeat="myQuestion in myQuestions">
-            <p class="txt">{{myQuestion.question}}</p>
+        	{{item.questionState === 'answered' ? 'answered' : 'unanswered' }}" 
+        	ng-repeat="item in quizList">
+            <p class="txt">{{item.question}}</p>
             <p class="ans"
             	ng-class="{ 
             	selected:isSelected($parent.$index, $index),  correct:isCorrect($parent.$index, $index)
             	}"
             	ng-click="selectAnswer($parent.$index, $index)"
-            	ng-repeat="answer in myQuestions[$index].answers">
+            	ng-repeat="answer in item.answers">
             	{{answer.text}}
             </p>
             <div class="feedback">
-            	<p ng-show="myQuestion.correctness === 'correct'">
+            	<p ng-show="item.correctness === 'correct'">
             		You are <strong>correct</strong>
             	</p>
-            	<p ng-show="myQuestion.correctness === 'incorrect'">
+            	<p ng-show="item.correctness === 'incorrect'">
             		Oops! that is not correct.
             	</p>
-            	<p> {{myQuestion.feedback}} </p>
+            	<p> {{item.feedback}} </p>
             	<div class="btn" ng-click="selectContinue()">
             		Continue
             	</div>
